@@ -72,11 +72,7 @@ const DOM = {
 
     // Product Grids
     gridShop: document.getElementById("product-grid-shop"),
-    gridInteractive: document.getElementById("product-grid-interactive"),
-    gridAnimated: document.getElementById("product-grid-animated"),
     emptyStateShop: document.getElementById("empty-state-shop"),
-    emptyStateInteractive: document.getElementById("empty-state-interactive"),
-    emptyStateAnimated: document.getElementById("empty-state-animated"),
 
     // Search & Sidebar filters
     searchInputs: document.querySelectorAll(".search-input"),
@@ -998,17 +994,6 @@ function initFilters() {
         maxInput.addEventListener("keypress", handleEnterKey);
     }
 
-    // Keep active checks for interactive view checkbox filters
-    document.querySelectorAll(".filter-price").forEach(checkbox => {
-        checkbox.addEventListener("change", () => {
-            const val = checkbox.value;
-            if (checkbox.checked) {
-                state.filters.priceRange.push(val);
-            } else {
-                state.filters.priceRange = state.filters.priceRange.filter(item => item !== val);
-            }
-        });
-    });
 
     // Rating filters
     document.querySelectorAll(".filter-rating").forEach(checkbox => {
@@ -1098,8 +1083,6 @@ function renderGrids() {
 
     // Render HTML in all relevant grid views
     if (DOM.gridShop) DOM.gridShop.innerHTML = renderGridMarkup(list, "shop");
-    if (DOM.gridInteractive) DOM.gridInteractive.innerHTML = renderGridMarkup(list, "interactive");
-    if (DOM.gridAnimated) DOM.gridAnimated.innerHTML = renderGridMarkup(list, "animated");
 
     bindProductCardEvents();
 }
@@ -1107,20 +1090,10 @@ function renderGrids() {
 function toggleGridEmptyState(count) {
     if (count === 0) {
         if (DOM.gridShop) DOM.gridShop.classList.add("hidden");
-        if (DOM.gridInteractive) DOM.gridInteractive.classList.add("hidden");
-        if (DOM.gridAnimated) DOM.gridAnimated.classList.add("hidden");
-
         if (DOM.emptyStateShop) DOM.emptyStateShop.classList.remove("hidden");
-        if (DOM.emptyStateInteractive) DOM.emptyStateInteractive.classList.remove("hidden");
-        if (DOM.emptyStateAnimated) DOM.emptyStateAnimated.classList.remove("hidden");
     } else {
         if (DOM.gridShop) DOM.gridShop.classList.remove("hidden");
-        if (DOM.gridInteractive) DOM.gridInteractive.classList.remove("hidden");
-        if (DOM.gridAnimated) DOM.gridAnimated.classList.remove("hidden");
-
         if (DOM.emptyStateShop) DOM.emptyStateShop.classList.add("hidden");
-        if (DOM.emptyStateInteractive) DOM.emptyStateInteractive.classList.add("hidden");
-        if (DOM.emptyStateAnimated) DOM.emptyStateAnimated.classList.add("hidden");
     }
 }
 
